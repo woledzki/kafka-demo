@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Kafka Demo - Generate Events</title>
+		<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="{{ &baseUrl }}/public/kafka-demo.css">
+	</head>
+	<body>
+		<section>
+			<h2>Click Me!</h2>
+			<span class="btn" data-key="Apples">Apples</span>
+			<span class="btn" data-key="Bananas">Bananas</span>
+			<span class="btn" data-key="Oranges">Oranges</span>
+			<span class="btn" data-key="Avocados">Avocados</span>
+			<span class="btn" data-key="Cherrys">Cherrys</span>
+			<span class="btn" data-key="Mangos">Mangos</span>
+		</section>
+	</body>
+	<script>
+		var buttons = document.getElementsByTagName("span")
+		for (let button of buttons) {
+			button.onclick = function() {
+				console.log("click " + this.dataset.key)
+				clickOn(this.dataset.key);
+			}
+		}
+
+		function clickOn(what) {
+			var xhttp = new XMLHttpRequest();
+    		xhttp.open("POST", "{{ &baseUrl }}/click/" + what, true);
+    		xhttp.setRequestHeader("Content-type", "application/json");
+			xhttp.send(); // fire and forget
+		}
+	</script>
+</html>

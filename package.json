@@ -1,0 +1,17 @@
+{
+  "name": "kafka-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hapi": "^17.5.1",
+    "inert": "^5.1.0",
+    "kafka-node": "^2.6.1",
+    "mustache": "^2.3.0"
+  }
+}
