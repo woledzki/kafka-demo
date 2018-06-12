@@ -7,11 +7,13 @@ module.exports.register = function(server, producer, templates) {
 		path: '/click/{thing}',
 		handler: function(request, h) {
 			console.log('+ ' + request.params.thing);
-			producer.send([{ topic: 'click', thing: request.params.thing}], function (err, data) {
-				console.log(data, err);
+			producer.send([{ topic: 'click', messages: request.params.thing}], function (err, data) {
+				if (err) {
+					console.log("send error", data, err);
+				}
 			});
 
-			return 'hello world - ' + request.params.thing;
+			return request.params.thing +', got it!';
 		}
 	});
 

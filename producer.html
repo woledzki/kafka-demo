@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Kafka Demo - Generate Events</title>
 		<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="{{ &baseUrl }}/public/kafka-demo.css">
+		<link rel="stylesheet" href="/public/kafka-demo.css">
 	</head>
 	<body>
 		<section>
@@ -21,15 +21,14 @@
 		var buttons = document.getElementsByTagName("span")
 		for (let button of buttons) {
 			button.onclick = function() {
-				console.log("click " + this.dataset.key)
 				clickOn(this.dataset.key);
 			}
 		}
 
 		function clickOn(what) {
 			var xhttp = new XMLHttpRequest();
-    		xhttp.open("POST", "{{ &baseUrl }}/click/" + what, true);
-    		xhttp.setRequestHeader("Content-type", "application/json");
+			xhttp.open("POST", "/click/" + what, true);
+			xhttp.setRequestHeader("Content-type", "application/json");
 			xhttp.send(); // fire and forget
 		}
 	</script>

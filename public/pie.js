@@ -10,7 +10,7 @@ svg.append("g")
 	.attr("class", "lines");
 
 var width = 600,
-    height = 300,
+	height = 300,
 	radius = Math.min(width, height) / 2;
 
 var pie = d3.layout.pie()
@@ -32,7 +32,7 @@ svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 var key = function(d){ return d.data.label; };
 
 var color = d3.scale.ordinal()
-	.domain(["Apples", "Bananas", "Oranges", "Avocado", "Cherry", "Mango"])
+	.domain(["Apples", "Bananas", "Oranges", "Avocados", "Cherrys", "Mangos"])
 	.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c"]);
 
 function change(data) {

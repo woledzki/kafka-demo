@@ -23,33 +23,35 @@ var templates = {
 
 // Create a server with a host and port
 const server = Hapi.server({
-    host: HOST,
+	host: HOST,
 	port: PORT,
 	routes: {
 		cors: true,
 		files: {
-            relativeTo: __dirname
+			relativeTo: __dirname
 		}
 	}
 });
 
 // Start the server
 async function start() {
-	producer.createTopics(['click'], false, function (err, data) {
+
+	console.log("create topic");
+	client.createTopics(['click'], function (err, data) {
 		console.log("Create topic", err, data)
 	});
 
-    try {
+	try {
 		await server.register(require('inert'));
 		routes.register(server, producer, templates)
-        await server.start();
-    }
-    catch (err) {
-        console.log(err);
-        process.exit(1);
-    }
+		await server.start();
+	}
+	catch (err) {
+		console.log(err);
+		process.exit(1);
+	}
 
-    console.log('Server running at:', server.info.uri);
+	console.log('Server running at:', server.info.uri);
 };
 
 producer.on('ready', function () {
@@ -62,4 +64,17 @@ producer.on('error', function (err) {
 
 client.on('error', function (err) {
 	console.error('Client error', err)
+});
+
+client.on('ready', function (err, data) {
+	console.error('Client ready', err, data)
+});
+
+client.once('connect', function () {
+	client.loadMetadataForTopics([], function (error, results) {
+	  if (error) {
+	  	return console.error(error);
+	  }
+	  console.log(results);
+	});
 });
